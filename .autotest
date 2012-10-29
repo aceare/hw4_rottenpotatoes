@@ -1,0 +1,7 @@
+#Autotest.add_hook :initialize do |at|
+#  # Ignore files in:
+#  at.add_exception(%r{^\./\.git})
+#  at.add_exception(%r{^\./log})
+#  at.add_exception(%r{^\./tmp})
+#end
+#

@@ -4,6 +4,7 @@ Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
+    puts "creating movie #{movie}"
     Movie.create!(movie)
   end
 #  flunk "Unimplemented"
@@ -77,5 +78,9 @@ Then /I should see all of the movies/ do
   tot = Movie.all.count
 #  assert page.all('table#movies tbody tr', :count => tot)
   assert page.all('table#movies tbody tr').count == tot
+end
+
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |title, director|
+  assert page.body.match("Details about #{title}(?xm:.*)Director:(?xm:.*)#{director}") != nil
 end
 
