@@ -1,9 +1,14 @@
 class MoviesController < ApplicationController
 
   def similar_movies
-#    @movie = Movie.find(params[:id])
-#    @movies = movie.find_similar_movies
-#    Movie.find_similar_movies(params[:id])
+    logger.info "params #{params} size #{Movie.count}"
+    @movie = Movie.find(params[:id])
+    if (@movie && @movie.director !="")
+      @movies = Movie.find_all_by_director(@movie.director)
+    else
+      flash[:notice] = "'#{@movie.title}' has no director info"
+      redirect_to movies_path
+    end      
   end
   
   def show
